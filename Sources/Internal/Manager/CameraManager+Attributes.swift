@@ -16,6 +16,7 @@ struct CameraManagerAttributes {
     var error: MCameraError? = nil
 
     var outputType: CameraOutputType = .photo
+    var isOutputTypeSwitchActive: Bool = true
     var cameraPosition: CameraPosition = .back
     var isAudioSourceAvailable: Bool = true
     var zoomFactor: CGFloat = 1.0
