@@ -42,6 +42,7 @@ import SwiftUI
  ## Camera Configuration
  To change the initial camera settings, use the following methods:
     - ``setCameraOutputType(_:)``
+    - ``setCameraOutputTypeSwitchVisibility(_:)``
     - ``setCameraPosition(_:)``
     - ``setAudioAvailability(_:)``
     - ``setZoomFactor(_:)``

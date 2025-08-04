@@ -138,6 +138,13 @@ public extension MCamera {
      For available options, please refer to the ``CameraOutputType`` documentation.
      */
     func setCameraOutputType(_ cameraOutputType: CameraOutputType) -> Self { manager.attributes.outputType = cameraOutputType; return self }
+    
+    /**
+    Changes the visibility of the camera output type switcher.
+     
+     For available options, please refer to the ``CameraOutputTypeSwitchVisibility`` documentation.
+     */
+    func setCameraOutputTypeSwitchVisibility(_ visibility: Bool) -> Self { manager.attributes.isOutputTypeSwitchActive = visibility; return self }
 
     /**
      Changes the initial camera position.
