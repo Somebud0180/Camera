@@ -29,6 +29,9 @@ extension CameraManagerNotificationCenter {
         DispatchQueue.global(qos: .userInitiated).async {
             if !session.isRunning {
                 session.startRunning()
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: Notification.Name("CameraSessionDidResume"), object: session)
+                }
             }
         }
     }
