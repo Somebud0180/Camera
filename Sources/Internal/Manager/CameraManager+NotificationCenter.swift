@@ -23,13 +23,6 @@ extension CameraManagerNotificationCenter {
         NotificationCenter.default.addObserver(self, selector: #selector(handleSessionWasInterrupted), name: .AVCaptureSessionWasInterrupted, object: parent.captureSession)
         NotificationCenter.default.addObserver(self, selector: #selector(resumeSession), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
-}
-
-private extension CameraManagerNotificationCenter {
-    @objc func handleSessionWasInterrupted() {
-        parent.attributes.lightMode = .off
-        parent.videoOutput.reset()
-    }
     
     @objc func resumeSession() {
         let session = parent.captureSession
