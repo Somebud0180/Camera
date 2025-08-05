@@ -24,30 +24,20 @@ extension CameraManagerNotificationCenter {
         NotificationCenter.default.addObserver(self, selector: #selector(resumeSession), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
-    @objc private func resumeSession() {
-        let session = parent.captureSession
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            if !session.isRunning {
-                session.startRunning()
-                
-                // Force UI update on the main thread after session starts
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    
-                    // Post a notification that the camera session has resumed
-                    NotificationCenter.default.post(name: Notification.Name("CameraSessionDidResume"), object: nil)
-                    
-                    // Trigger UI update via objectWillChange
-                    self.parent.objectWillChange.send()
-                }
-            }
-        }
-    }
 }
 private extension CameraManagerNotificationCenter {
     @objc func handleSessionWasInterrupted() {
         parent.attributes.lightMode = .off
         parent.videoOutput.reset()
+    }
+    
+    @objc func resumeSession() {
+        let session = parent.captureSession
+        DispatchQueue.global(qos: .userInitiated).async {
+            if !session.isRunning {
+                session.startRunning()
+            }
+        }
     }
 }
 

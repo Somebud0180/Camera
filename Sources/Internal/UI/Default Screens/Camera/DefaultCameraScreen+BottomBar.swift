@@ -13,8 +13,8 @@ import SwiftUI
 
 extension DefaultCameraScreen { struct BottomBar: View {
     let parent: DefaultCameraScreen
-
-
+    
+    
     var body: some View {
         ZStack(alignment: .top) {
             createOutputTypeSwitch()
@@ -84,14 +84,14 @@ private extension DefaultCameraScreen.BottomBar {
 
 private extension DefaultCameraScreen.BottomBar {
     var lightButtonIconColor: Color { switch parent.lightMode {
-        case .on: .init(.mijickBackgroundYellow)
-        case .off: .init(.mijickBackgroundInverted)
+    case .on: .init(.mijickBackgroundYellow)
+    case .off: .init(.mijickBackgroundInverted)
     }}
     var changeCameraPositionButtonIconColor: Color { .init(.mijickBackgroundInverted) }
 }
 private extension DefaultCameraScreen.BottomBar {
-    var isOutputTypeSwitchActive: Bool { parent.config.cameraOutputSwitchAllowed && parent.cameraManager.attributes.isOutputTypeSwitchActive && !parent.isRecording }
-    var isLightButtonActive: Bool { parent.config.lightButtonAllowed && parent.hasLight && !parent.isRecording }
-    var isCaptureButtonActive: Bool { parent.config.captureButtonAllowed }
-    var isChangeCameraPositionButtonActive: Bool { parent.config.cameraPositionButtonAllowed && !parent.isRecording }
+    var isOutputTypeSwitchActive: Bool { parent.config.cameraOutputSwitchAllowed && parent.cameraManager.captureSession.isRunning && !parent.isRecording }
+    var isLightButtonActive: Bool { parent.config.lightButtonAllowed && parent.hasLight && parent.cameraManager.captureSession.isRunning && !parent.isRecording }
+    var isCaptureButtonActive: Bool { parent.config.captureButtonAllowed && parent.cameraManager.captureSession.isRunning }
+    var isChangeCameraPositionButtonActive: Bool { parent.config.cameraPositionButtonAllowed && parent.cameraManager.captureSession.isRunning && !parent.isRecording }
 }

@@ -13,8 +13,8 @@ import SwiftUI
 
 extension DefaultCameraScreen { struct TopBar: View {
     let parent: DefaultCameraScreen
-
-
+    
+    
     var body: some View {
         ZStack {
             createCloseButton()
@@ -86,26 +86,27 @@ private extension DefaultCameraScreen.TopBar {
 
 private extension DefaultCameraScreen.TopBar {
     var topPadding: CGFloat { switch parent.deviceOrientation {
-        case .portrait, .portraitUpsideDown: return 40
-        default: return 20
+    case .portrait, .portraitUpsideDown: return 40
+    default: return 20
     }}
 }
 private extension DefaultCameraScreen.TopBar {
     var gridButtonIcon: ImageResource { switch parent.isGridVisible {
-        case true: .mijickIconGridOn
-        case false: .mijickIconGridOff
+    case true: .mijickIconGridOn
+    case false: .mijickIconGridOff
     }}
     var flipButtonIcon: ImageResource { switch parent.isOutputMirrored {
-        case true: .mijickIconFlipOn
-        case false: .mijickIconFlipOff
+    case true: .mijickIconFlipOn
+    case false: .mijickIconFlipOff
     }}
     var flashButtonIcon: ImageResource { switch parent.flashMode {
-        case .off: .mijickIconFlashOff
-        case .on: .mijickIconFlashOn
-        case .auto: .mijickIconFlashAuto
+    case .off: .mijickIconFlashOff
+    case .on: .mijickIconFlashOn
+    case .auto: .mijickIconFlashAuto
     }}
 }
 private extension DefaultCameraScreen.TopBar {
+    var isTopBarActive: Bool { parent.cameraManager.captureSession.isRunning }
     var isCloseButtonActive: Bool { parent.config.closeButtonAllowed && !parent.isRecording }
     var isCentralViewActive: Bool { parent.isRecording }
     var isRightSideViewActive: Bool { !parent.isRecording }
